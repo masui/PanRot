@@ -11,7 +11,7 @@ var state = STATE.RESET;
 function slowState(){
     if(state == STATE.CHECK){
 	// fast/slow 判断前だったとき
-	slow(direction)
+	slow()
     }
     state = STATE.SLOW
 }
@@ -19,7 +19,7 @@ function resetState(){
     state = STATE.RESET
 }
 var resetTimeout = null // 初期状態にもどる
-var slowModeTimeout = null // 速さチェック
+var slowTimeout = null // 速さチェック
 
 var fastval = 0
 var slowval = 0
@@ -34,11 +34,11 @@ function slow(){
 }
 
 function move(){
-    clearTimeout(slowModeTimeout)
+    clearTimeout(slowTimeout)
     clearTimeout(resetTimeout)
     if(state == STATE.RESET){
 	state = STATE.CHECK
-	slowModeTimeout = setTimeout(slowState,500)
+	slowTimeout = setTimeout(slowState,500)
     }
     else if(state == STATE.CHECK){
 	state = STATE.FAST
@@ -65,7 +65,4 @@ document.addEventListener('keydown', event => {
 	direction = DIR.LEFT
 	move()
     }
-});
-
-document.addEventListener('keyup', event => {
 });
