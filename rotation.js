@@ -24,13 +24,11 @@ var slowModeTimeout = null // 速さチェック
 var fastval = 0
 var slowval = 0
 
-function fast(dir){
-    direction = dir
+function fast(){
     fastval += (direction == DIR.RIGHT ? 1 : -1)
     document.getElementById('fast').textContent = fastval;
 }
-function slow(dir){
-    direction = dir
+function slow(){
     slowval += (direction == DIR.RIGHT ? 1 : -1)
     document.getElementById('slow').textContent = slowval;
 }
@@ -45,14 +43,14 @@ function move(dir){
     }
     else if(state == STATE.CHECK){
 	state = STATE.FAST
-	fast(dir)
-	fast(dir)
+	fast()
+	fast()
     }
     else if(state == STATE.SLOW){ // 低速
-	slow(dir)
+	slow()
     }
     else if(state == STATE.FAST){ // 高速
-	fast(dir)
+	fast()
     }
     clearTimeout(resetTimeout)
     resetTimeout = setTimeout(resetState,1000)
