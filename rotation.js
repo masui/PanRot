@@ -56,12 +56,12 @@ function move(){
 }
 
 document.addEventListener('keydown', event => {
-    var key = event.key
-    if(key == 'ArrowRight' || key == 'ArrowUp'){
+    switch(event.key){
+    case 'ArrowRight': case 'ArrowUp':
 	direction = DIR.RIGHT
 	move()
-    }
-    if(key == 'ArrowLeft' || key == 'ArrowDown'){
+	break
+    case 'ArrowLeft': case 'ArrowDown':
 	direction = DIR.LEFT
 	move()
     }
