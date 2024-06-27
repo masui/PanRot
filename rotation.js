@@ -33,8 +33,7 @@ function slow(){
     document.getElementById('slow').textContent = slowval;
 }
 
-function move(dir){
-    direction = dir
+function move(){
     clearTimeout(slowModeTimeout)
     clearTimeout(resetTimeout)
     if(state == STATE.RESET){
@@ -59,10 +58,12 @@ function move(dir){
 document.addEventListener('keydown', event => {
     var key = event.key
     if(key == 'ArrowRight' || key == 'ArrowUp'){
-	move(DIR.RIGHT)
+	direction = DIR.RIGHT
+	move()
     }
     if(key == 'ArrowLeft' || key == 'ArrowDown'){
-	move(DIR.LEFT)
+	direction = DIR.LEFT
+	move()
     }
 });
 
