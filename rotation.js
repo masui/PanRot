@@ -68,8 +68,8 @@ function slow(){
 function move(){
     clearTimeout(slowTimeout)
     clearTimeout(resetTimeout)
-
     resetTimeout = setTimeout(resetState,1000)
+
     if(state == STATE.RESET){
 	state = STATE.CHECK
 	slowTimeout = setTimeout(slowState,500)
@@ -85,8 +85,6 @@ function move(){
     else if(state == STATE.FAST){ // 高速
 	fast()
     }
-    //clearTimeout(resetTimeout)
-    //resetTimeout = setTimeout(resetState,1000)
 }
 
 document.addEventListener('keydown', event => {
