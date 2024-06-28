@@ -24,13 +24,38 @@ var slowTimeout = null // 速さチェック
 var fastval = 0
 var slowval = 0
 
+var volume = 0.5
+
 function fast(){
     fastval += (direction == DIR.RIGHT ? 1 : -1)
     document.getElementById('fast').textContent = fastval;
+
+    var video = document.getElementById('video')
+    video.volume = 0.5 + fastval * 0.1
+
 }
+
+const contents = [
+    null,
+    "https://s3-ap-northeast-1.amazonaws.com/masui.org/7/f/7f8206f5cc4bdd8c6ec60024b5ccfa67.mp4", // Estate
+    "https://s3-ap-northeast-1.amazonaws.com/masui.org/f/b/fb52a560eed7a6a004544457b0f30f7a.mp4", // Zigeunerweisen
+    "https://s3-ap-northeast-1.amazonaws.com/masui.org/0/3/03ed863e67f7d9ae31b67e8fe9d4be89.mp4", // Invitation
+    null
+]
+
 function slow(){
     slowval += (direction == DIR.RIGHT ? 1 : -1)
     document.getElementById('slow').textContent = slowval;
+
+    if(contents[slowval]){
+	video = document.getElementById('video')
+	video.src = contents[slowval]
+	video.play()
+    }
+    else {
+	video.volume = 0.5
+	video.pause()
+    }
 }
 
 function move(){
