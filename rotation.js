@@ -18,7 +18,10 @@ function slowState(){
 function resetState(){
     state = STATE.RESET
     
-    document.getElementById('state').textContent = state;
+    //document.getElementById('state').textContent = state;
+    document.getElementById('channel').style.backgroundColor = '#ff8';
+    document.getElementById('volume').style.backgroundColor = 'white';
+    
 }
 var resetTimeout = null // 初期状態にもどる
 var slowTimeout = null // 速さチェック
@@ -32,7 +35,9 @@ function fast(){
     fastval += (direction == DIR.RIGHT ? 1 : -1)
     document.getElementById('fast').textContent = fastval;
 
-    document.getElementById('state').textContent = state;
+    //document.getElementById('state').textContent = state;
+    document.getElementById('channel').style.backgroundColor = 'white';
+    document.getElementById('volume').style.backgroundColor = '#ff8';
     
     var video = document.getElementById('video')
     video.volume = 0.5 + fastval * 0.1
@@ -52,8 +57,10 @@ function slow(){
     slowval += (direction == DIR.RIGHT ? 1 : -1)
     document.getElementById('slow').textContent = slowval;
 
-    document.getElementById('state').textContent = state;
-    
+    //document.getElementById('state').textContent = state;
+    document.getElementById('channel').style.backgroundColor = '#ff8'
+    document.getElementById('volume').style.backgroundColor = 'white'
+
     if(contents[slowval]){
 	video = document.getElementById('video')
 	video.src = contents[slowval]
@@ -98,3 +105,9 @@ document.addEventListener('keydown', event => {
 	move()
     }
 });
+
+//$(function(){
+//    resetState()
+//})
+
+window.onload = resetState
