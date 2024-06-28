@@ -17,6 +17,8 @@ function slowState(){
 }
 function resetState(){
     state = STATE.RESET
+    
+    document.getElementById('state').textContent = state;
 }
 var resetTimeout = null // 初期状態にもどる
 var slowTimeout = null // 速さチェック
@@ -30,6 +32,8 @@ function fast(){
     fastval += (direction == DIR.RIGHT ? 1 : -1)
     document.getElementById('fast').textContent = fastval;
 
+    document.getElementById('state').textContent = state;
+    
     var video = document.getElementById('video')
     video.volume = 0.5 + fastval * 0.1
 
@@ -48,6 +52,8 @@ function slow(){
     slowval += (direction == DIR.RIGHT ? 1 : -1)
     document.getElementById('slow').textContent = slowval;
 
+    document.getElementById('state').textContent = state;
+    
     if(contents[slowval]){
 	video = document.getElementById('video')
 	video.src = contents[slowval]
@@ -62,6 +68,8 @@ function slow(){
 function move(){
     clearTimeout(slowTimeout)
     clearTimeout(resetTimeout)
+
+    resetTimeout = setTimeout(resetState,1000)
     if(state == STATE.RESET){
 	state = STATE.CHECK
 	slowTimeout = setTimeout(slowState,500)
@@ -77,8 +85,8 @@ function move(){
     else if(state == STATE.FAST){ // 高速
 	fast()
     }
-    clearTimeout(resetTimeout)
-    resetTimeout = setTimeout(resetState,1000)
+    //clearTimeout(resetTimeout)
+    //resetTimeout = setTimeout(resetState,1000)
 }
 
 document.addEventListener('keydown', event => {
